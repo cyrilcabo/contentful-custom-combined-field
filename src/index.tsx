@@ -134,7 +134,14 @@ export const CombinedField = ({ sdk }: CombinedFieldProps) => {
         const fieldParts = part.split(':');
         let raw = '';
 
-        if (fieldParts.length === 2) {
+        if (fieldParts[1].includes('===')) {
+          const transformedPart = fieldParts[1].split('===');
+          const fieldName = transformedPart[0];
+          const compareCond = transformedPart[1].split('?');
+          const resultCond = compareCond[1].split('!');
+          const fieldValue = sdk.entry.fields[fieldName].getValue(locale || defaultLocale);
+          raw = fieldValue === compareCond[0] ? resultCond[0] : resultCond[1];
+        } else if (fieldParts.length === 2) {
           if (sdk.entry.fields[fieldParts[1]] !== undefined) {
             if (sdk.entry.fields[fieldParts[1]].locales.includes(locale)) {
               raw = sdk.entry.fields[fieldParts[1]].getValue(locale) || '';

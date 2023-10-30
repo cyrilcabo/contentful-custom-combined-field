@@ -1,6 +1,6 @@
 {
-  "id": "combined-field",
-  "name": "Combined Field",
+  "id": "custom-combined-field",
+  "name": "Custom Combined Field",
   "srcdoc": "./build/index.html",
   "fieldTypes": ["Symbol", "Text"],
   "parameters": {
